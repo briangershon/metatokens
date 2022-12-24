@@ -6,23 +6,47 @@ Metatoken extensions act as nested ERC-1155 contracts that exist to support and 
 
 RC-1155M contracts provide hooks into the mutability actions of ERC-1155 tokens. Each extension can be registered against any number of actions, and must provide appropriate external functions for these hooks. The ERC-1155M contract provides two hooks for each action: pre-action and post-action. This results in a total of 6 groups and 12 hooks for extensions to implement; however, they must implement both the pre-action and post-action hooks for the specific action they are registered for, with a minimum of one action per extension (see: IMetatoken1155). Hooks may revert if applicable, but the pre-action hooks’ mutability must be either view or pure.
 
-# development
+[Read the whitepaper](./ERC-1155%20Metatokens.pdf)
 
-Run `yarn install --frozen-lockfile` to install all packages.
+## setup
+
+- ensure `node` and `python` are installed and on your path
+- run `yarn install --frozen-lockfile` to install all packages.
+- open `metatokens.code-workspace` in VSCode
+- choose `Terminal > Run Build Task...` to run all the watch tasks simultaneously. If you run into errors, you may need to restart one of the watches due to potential race conditions.
+- you can also run one or more separately in a terminal
+
+Here are the manual steps to run the tests:
+
+- run `yarn build` once to generate `./tsc-alias-replacers/replacerA.js` (you'll see an error about "replacerA.ts is not under `rootDir")
+- run `yarn build:tsc-alias`
+- run `yarn test` to run tests
+
+## development
 
 To improve debugging of `delegatecall`, patch the hardhat network according to `hardhat_patch.js`.
 
-# scripts
+## scripts
 
 - `yarn build` - compiles the tests
 - `yarn build:tsc-alias` - updates the import paths in the compiled tests
 - `yarn genabi:watch` - updates generated contract abis when contracts are changed
 - `yarn flatten:watch` - automatically generates flattened, single-source contract files
 - `yarn test:watch` - restarts tests whenever a test file or contract is updated
-- `yarn script:tsc-alias` - updates the import paths for the hardhat scripts
 
-# deployment / minting scripts
+## deployment
 
-# setup
+There are two primary contracts:
 
-Run `yarn build` to compile the scripts and `yarn script:tsc-alias` to ensure that the path aliases are updated correctly.
+- the main contract `ERC1155M.sol` which should be a drop-in replacement for a standard ERC1155
+- the metatoken extension contract `Metatoken155.sol` which supports the additional metatoken features
+
+Deploy via:
+
+- `rm tools/.flattencache` # to build from scratch if desired
+- `yarn flatten`
+- compile, deploy and verify `flattened/ERC-1155M/ERC1155M_flattened.sol` or `flattened/metatokens/ERC20Metatoken_flattened.sol`
+  - head over to https://remix.ethereum.org/
+  - copy contract in
+  - compile and deploy via VM (for testing) or wallet (for deploying to chain)
+  - after deploy, in Remix UI, click on gear to add the "ETHERSCAN - CONTRACT VERIFICATION" plugin. Add your etherscan API key and you can verify the contract (and upload contract source)
