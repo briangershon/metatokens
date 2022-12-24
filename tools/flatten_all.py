@@ -43,7 +43,7 @@ def flatten(root, file):
         #p = Popen("yarn", args=["hardhat", "flatten", src, ">", dest])
         #p.wait()
         #system("yarn hardhat flatten %s > %s" % (src, dest))
-        p = run(["yarn", "--silent", "hardhat", "flatten", src], shell=True, stdout=PIPE)
+        p = run(["yarn", "--silent", "hardhat", "flatten", src], shell=False, stdout=PIPE)
         flattened = p.stdout.decode("utf-8")
     except Exception as e:
         print("Could not flatten: %s" % src)

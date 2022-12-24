@@ -36,5 +36,14 @@ To improve debugging of `delegatecall`, patch the hardhat network according to `
 
 ## deployment
 
-- run `yarn flatten`
-- deploy via Remix
+There are two primary contracts:
+
+- the main contract `ERC1155M.sol` which should be a drop-in replacement for a standard ERC1155
+- the metatoken extension contract `Metatoken155.sol` which supports the additional metatoken features
+
+Deploy via:
+
+- `rm tools/.flattencache` # to build from scratch if desired
+- `yarn flatten`
+- deploy `flattened/ERC-1155M/ERC1155M_flattened.sol` via Remix
+- deploy `flattened/metatokens/ERC20Metatoken_flattened.sol` via Remix
