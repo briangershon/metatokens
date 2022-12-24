@@ -45,5 +45,8 @@ Deploy via:
 
 - `rm tools/.flattencache` # to build from scratch if desired
 - `yarn flatten`
-- deploy `flattened/ERC-1155M/ERC1155M_flattened.sol` via Remix
-- deploy `flattened/metatokens/ERC20Metatoken_flattened.sol` via Remix
+- compile, deploy and verify `flattened/ERC-1155M/ERC1155M_flattened.sol` or `flattened/metatokens/ERC20Metatoken_flattened.sol`
+  - head over to https://remix.ethereum.org/
+  - copy contract in
+  - compile and deploy via VM (for testing) or wallet (for deploying to chain)
+  - after deploy, in Remix UI, click on gear to add the "ETHERSCAN - CONTRACT VERIFICATION" plugin. Add your etherscan API key and you can verify the contract (and upload contract source)
