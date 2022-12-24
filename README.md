@@ -6,6 +6,8 @@ Metatoken extensions act as nested ERC-1155 contracts that exist to support and 
 
 RC-1155M contracts provide hooks into the mutability actions of ERC-1155 tokens. Each extension can be registered against any number of actions, and must provide appropriate external functions for these hooks. The ERC-1155M contract provides two hooks for each action: pre-action and post-action. This results in a total of 6 groups and 12 hooks for extensions to implement; however, they must implement both the pre-action and post-action hooks for the specific action they are registered for, with a minimum of one action per extension (see: IMetatoken1155). Hooks may revert if applicable, but the pre-action hooks’ mutability must be either view or pure.
 
+[Read the whitepaper](./ERC-1155%20Metatokens.pdf)
+
 ## setup
 
 - ensure `node` and `python` are installed and on your path
@@ -14,7 +16,11 @@ RC-1155M contracts provide hooks into the mutability actions of ERC-1155 tokens.
 - choose `Terminal > Run Build Task...` to run all the watch tasks simultaneously. If you run into errors, you may need to restart one of the watches due to potential race conditions.
 - you can also run one or more separately in a terminal
 
-Run `yarn build` to compile the scripts and `yarn script:tsc-alias` to ensure that the path aliases are updated correctly.
+Here are the manual steps to run the tests:
+
+- run `yarn build` once to generate `./tsc-alias-replacers/replacerA.js` (you'll see an error about "replacerA.ts is not under `rootDir")
+- run `yarn build:tsc-alias`
+- run `yarn test` to run tests
 
 ## development
 
@@ -27,6 +33,8 @@ To improve debugging of `delegatecall`, patch the hardhat network according to `
 - `yarn genabi:watch` - updates generated contract abis when contracts are changed
 - `yarn flatten:watch` - automatically generates flattened, single-source contract files
 - `yarn test:watch` - restarts tests whenever a test file or contract is updated
-- `yarn script:tsc-alias` - updates the import paths for the hardhat scripts
 
-## deployment / minting scripts
+## deployment
+
+- run `yarn flatten`
+- deploy via Remix
