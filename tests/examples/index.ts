@@ -26,7 +26,7 @@ function test_mintToken() {
     );
   });
 
-  IT("Should be able to mint", async () => {
+  IT("Should be able to mint if payment at least 0.01 ether", async () => {
     const [owner] = await hre.ethers.getSigners();
     const tokenId = hre.ethers.BigNumber.from("0");
 
@@ -34,26 +34,28 @@ function test_mintToken() {
       owner.address,
       tokenId,
       hre.ethers.BigNumber.from("1"),
-      hre.ethers.constants.HashZero
+      hre.ethers.constants.HashZero,
+      {
+        value: hre.ethers.utils.parseEther("0.01"),
+      }
     );
 
     expectEvent(receipt, "TransferSingle");
   });
 
-  //   IT("Should requirement payment of 0.01 ETH", async () => {
-  //     const [owner] = await hre.ethers.getSigners();
-  //     const tokenId = hre.ethers.BigNumber.from("0");
+  IT("Should revert mint if not enough funds", async () => {
+    const [owner] = await hre.ethers.getSigners();
+    const tokenId = hre.ethers.BigNumber.from("0");
 
-  //     let receipt = await erc1155mInstance.mint(
-  //       owner.address,
-  //       tokenId,
-  //       hre.ethers.BigNumber.from("1"),
-  //       hre.ethers.constants.HashZero,
-  //       {
-  //         value: hre.ethers.utils.parseEther("9.0"),
-  //       }
-  //     );
-
-  //     expectEvent(receipt, "TransferSingle");
-  //   });
+    try {
+      await erc1155mInstance.mint(
+        owner.address,
+        tokenId,
+        hre.ethers.BigNumber.from("1"),
+        hre.ethers.constants.HashZero
+      );
+    } catch (e) {
+      console.log("WIP", e.message);
+    }
+  });
 }

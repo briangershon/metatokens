@@ -5,6 +5,7 @@ pragma solidity ^0.8.13;
 import "../ERC-1155M/ERC1155M.sol";
 
 contract ERC1155MMint is ERC1155M {
+    uint256 public mintPrice = 0.01 ether;
     uint256 public constant TOKENID_MEMBERSHIP = 0;
 
     constructor(string memory uri) {
@@ -20,7 +21,8 @@ contract ERC1155MMint is ERC1155M {
         uint256 id,
         uint256 value,
         bytes memory data
-    ) public {
+    ) public payable {
+        require(mintPrice <= msg.value, "Not enough funds sent");
         _mintTokens(to, _asSingletonArray(id), _asSingletonArray(value), data);
     }
 
