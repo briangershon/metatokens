@@ -12,11 +12,14 @@ RC-1155M contracts provide hooks into the mutability actions of ERC-1155 tokens.
 
 - ensure `node` and `python` are installed and on your path
 - run `yarn install --frozen-lockfile` to install all packages.
+
+Primary workflow for running tests as code changes:
+
 - open `metatokens.code-workspace` in VSCode
 - choose `Terminal > Run Build Task...` to run all the watch tasks simultaneously. If you run into errors, you may need to restart one of the watches due to potential race conditions.
-- you can also run one or more separately in a terminal
+- you can also run one or more steps separately in a terminal
 
-Here are the manual steps to run the tests:
+For documentation, here are the steps that run automatically above, if you needed to run manually:
 
 - run `yarn build` once to generate `./tsc-alias-replacers/replacerA.js` (you'll see an error about "replacerA.ts is not under `rootDir")
 - run `yarn build:tsc-alias`
