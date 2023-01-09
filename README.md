@@ -51,5 +51,5 @@ Deploy via:
 - compile, deploy and verify contract
   - head over to https://remix.ethereum.org/
   - copy contract in, for example `flattened/ERC-1155M/ERC1155M_flattened.sol` or `flattened/examples/ERC1155M-Mint_flattened.sol`
-  - compile and deploy via Remix VM (for testing) or wallet (for deploying to chain)
-  - after deploy, in Remix UI, click on gear to add the "ETHERSCAN - CONTRACT VERIFICATION" plugin. Add your etherscan API key and you can verify the contract (and upload contract source)
+  - compile and deploy via Remix VM for testing, or wallet for deploying to chain
+  - after deploy, in Remix UI, click on gear to add the "ETHERSCAN - CONTRACT VERIFICATION" plugin. Add your etherscan API key. After deploying contract, click "ETHERSCAN - CONTRACT VERIFICATION" icon on the left, choose contract and paste in newly deployed contract address, and source code will be uploaded.
