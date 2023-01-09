@@ -19,11 +19,10 @@ contract ERC1155MMint is ERC1155M {
     function mint(
         address to,
         uint256 id,
-        uint256 value,
         bytes memory data
     ) public payable {
         require(mintPrice <= msg.value, "Not enough funds sent");
-        _mintTokens(to, _asSingletonArray(id), _asSingletonArray(value), data);
+        _mintTokens(to, _asSingletonArray(id), _asSingletonArray(msg.value), data);
     }
 
     function _asSingletonArray(

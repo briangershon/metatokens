@@ -33,7 +33,6 @@ function test_mintToken() {
     let receipt = await erc1155mInstance.mint(
       owner.address,
       tokenId,
-      hre.ethers.BigNumber.from("1"),
       hre.ethers.constants.HashZero,
       {
         value: hre.ethers.utils.parseEther("0.01"),
@@ -51,11 +50,11 @@ function test_mintToken() {
       await erc1155mInstance.mint(
         owner.address,
         tokenId,
-        hre.ethers.BigNumber.from("1"),
         hre.ethers.constants.HashZero
       );
     } catch (e) {
-      console.log("WIP", e.message);
+      const err = e as Error;
+      console.log("WIP", err.message);
     }
   });
 }
