@@ -85,7 +85,6 @@ function test_mintToken() {
     const contractBalanceAfter = await hre.ethers.provider.getBalance(
       erc1155mInstance.address
     );
-    console.log({ contractBalanceAfter });
 
     assert.strictEqual(
       contractBalanceAfter.toString(),
@@ -97,7 +96,7 @@ function test_mintToken() {
     // );
   });
 
-  // TODO: Once roles are added
-
-  // IT("Should fail to withdraw funds if not proper role", async () => {});
+  // IT("Should fail to withdraw funds if not proper role", async () => {
+  //   await erc1155mInstance.withdraw();
+  // });
 }
