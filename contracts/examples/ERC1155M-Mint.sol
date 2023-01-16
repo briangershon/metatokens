@@ -33,4 +33,10 @@ contract ERC1155MMint is ERC1155M {
 
         return array;
     }
+
+    function withdraw() external {
+        uint256 _balance = address(this).balance;
+        (bool success, ) = payable(msg.sender).call{value: _balance}('');
+        require(success, "Unable to withdraw");
+    }
 }
