@@ -10,7 +10,8 @@ RC-1155M contracts provide hooks into the mutability actions of ERC-1155 tokens.
 
 ## setup
 
-- ensure `node` and `python` are installed and on your path
+- ensure `node` (v16) and `python` (v3) are installed and on your path. **NOTE that Node v16.x and Hardhat 2.9.x are required** since tooling not working when upgrading Hardhat to 2.10+ which is needed for Node v18+. Tooling also ran into problems upgrading from chalk 4.x to 5.x. Errors caused by unable to find `test/utils` due to ESM errors.
+
 - run `yarn install --frozen-lockfile` to install all packages.
 
 Primary workflow for running tests as code changes:
